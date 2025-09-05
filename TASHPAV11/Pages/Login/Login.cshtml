@@ -1,0 +1,39 @@
+﻿@page
+@model TASHPAV11.Pages.Login.LoginModel
+@{
+}
+<script src="~/js/Login.js"></script>
+<div>
+    <h1 style="margin-left:40%;">LogIn Form</h1>
+</div>
+<div class="row justify-content-center align-itms-center">
+    <div class="col-sm-11 col-md-9 col-lg-7 col-xl-5">
+        <div class="card h-100">
+            <div class="card-header"<h1>Login</h1>
+                    <div class="card-body">
+                        <form method="post">
+
+                         <label>Login    </label>
+                        <input type="text" name="userName" id="userName" placeholder="Login" onkeyup="checkLogInValidity(this, 'login-msg')" />
+                        <span id="login-msg"></span>
+                        <br/><br/>
+                        <label>Paswword</label>
+                        <input type="password" name="password" id="password" placeholder="password" onkeyup="checkLogInValidity(this, 'password-msg')" />
+                        <span id="password-msg"></span>
+                        <br/> <br/>
+
+
+                            <input type="submit" name="submit" class="login" value="LogIn" onclick="return login1()" />
+                            <input type="reset" class="reset" value="RESET" onclick="reset2('login-msg','password-msg')" />
+
+                            <div class="mb-3 form-text text-danger " id="msgBox">
+                            @Model.msg
+                            </div>
+                            <div class="check">
+                                Check Something
+                            </div>
+
+                        </form>
+                    <div>
+            </div>
+        </div>
