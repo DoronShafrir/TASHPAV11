@@ -1,4 +1,11 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+@{
+    var sessionValue = Context.Session.GetString("Username");
+    var sessionAdmin = Context.Session.GetString("Admin");
+    var sessionFirst = Context.Session.GetString("Admin");
+
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -30,6 +37,24 @@
                                 <li><a class="nav-link text-dark" href="~/Login/Exit">Exit</a></li>
                             </ul>
                         </div>
+                        <div class="user-only user-admin">
+                            <div class="dropdown d-inline-flex justify-content-around ">
+                                <a class="btn  dropdown-toggle text-dark " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Courses</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="nav-link text-dark" href="~/Courses/ManageCourses">Manage Courses</a></li>
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="user-only">
+                            <div class="dropdown d-inline-flex justify-content-around user-only">
+                                <a class="btn  dropdown-toggle text-dark " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Students</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="nav-link text-dark" href="~/Students/MangeMyCourses">Manage Students</a></li>
+                                    
+                                </ul>
+                            </div>
+                        </div>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
                         </li>
@@ -49,6 +74,43 @@
             &copy; 2025 - TASHPAV11 - <a asp-area="" asp-page="/Privacy">Privacy</a>
         </div>
     </footer>
+
+    @if (!string.IsNullOrEmpty(sessionValue))
+    {
+        <script>
+            const userOnlyElements = document.querySelectorAll(".user-only");
+            userOnlyElements.forEach(element => {
+                element.style.display = 'block';
+            });
+        </script>
+    }
+    @if (string.IsNullOrEmpty(sessionValue))
+    {
+        <script>
+            const userOnlyElements = document.querySelectorAll(".user-only");
+            userOnlyElements.forEach(element => {
+                element.style.display = 'none';
+            });
+        </script>
+    }
+    @if (sessionAdmin == "Admin")
+    {
+        <script>
+            const adminOnlyElements = document.querySelectorAll(".user-admin");
+            adminOnlyElements.forEach(element => {
+                element.style.display = 'block';
+            });
+        </script>
+    }
+    @if (sessionAdmin != "Admin")
+    {
+        <script>
+            const adminOnlyElements = document.querySelectorAll(".user-admin");
+            adminOnlyElements.forEach(element => {
+                element.style.display = 'none';
+            });
+        </script>
+    }
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
