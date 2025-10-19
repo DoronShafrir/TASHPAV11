@@ -13,7 +13,6 @@
 
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Pages\Students\" />
   </ItemGroup>
 
 </Project>

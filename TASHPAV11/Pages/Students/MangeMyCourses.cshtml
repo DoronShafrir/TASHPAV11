@@ -1,0 +1,83 @@
+﻿@page
+@model TASHPAV11.Pages.Students.MangeMyCoursesModel
+@{
+}
+
+<div class="container my-5">
+    <div class="d-flex justify-content-between gap-3">
+        <form method="get" asp-page-handler="RenderCourses">
+            <button type="submit" value="Show All Courses" class="btn btn-primary" >Show All Courses</button>
+        </form>
+        <form method="post" asp-page-handler="ShowAddCourses">
+            <button type="submit" value="Add Course" class="btn btn-primary">Add Course</button>
+        </form>
+        <form method="post" asp-page-handler="ShowDeleteCourse">
+            <button type="submit" value="Delete Course" class="btn btn-primary">Delete Course</button>
+        </form>
+    </div>
+    @* <form method="post" asp-page-handler="ShowAddCourses">
+        <div id="List" style="@Model.DisplayList">@Html.Raw(@Model.List)</div>
+    </form> *@
+</div>
+@* Add Insert part *@
+<div id="CourseTable" style="@Model.DisplayList">
+
+
+    @if (Model.List != null && Model.List.Count > 0)
+    {
+        <table class='table table-bordered table-striped'>
+            <tr>
+                <th>ID</th>
+                <th>Student Name</th>
+                <th>Course Name</th>
+                <th>Teacher </th>
+
+            </tr>
+
+            @foreach (Model.Student student in Model.List)
+            {
+                <tr>
+                    <td>@student.CId</td>
+                    <td>@student.Name</td>
+                    <td>@student.CourseName</td>
+                    <td>@student.ResponsibleTeacher</td>
+                </tr>
+            }
+
+        </table>
+    }
+</div>
+<div class="button-container">
+    <div class="row">
+        @* Add Insert part *@
+        <form method="post" asp-page-handler="InsertCourse">
+            <div id="active_input" style="@Model.active_input">
+                <input type="text" id="newCourseName" name="newCourseName" class="input_field" placeholder="Course Name" />
+                <input type="text" id="newCourseNumber" name="newCourseNumber" class="input_field" placeholder="Course Number" />
+                <input type="text" id="newCourseTeacher" name="newCourseTeacher" class="input_field" placeholder="Teacher" />
+
+                <button type="submit" value="Insert" id="submitNewButton" style="@Model.insert_button">
+                    Insert
+                </button>
+                <div style="color: red; font-size: 1.0em; position: absolute">
+                    @Model.insertMSG
+                </div>
+            </div>
+        </form>
+    </div>
+    @* Delete part *@
+    <form method="post" asp-page-handler="DeleteCourse">
+        <div id="delete_input" style="@Model.delete_input">
+            <input type="text" id="deleteCourseName" class="input_field" placeholder="Course Name to Remove" />
+            <input type="text" id="deleteCourseNumber" class="input_field" placeholder="Course Number to Remove" />
+            <input type="text" id="deleteCourseTeacher" class="input_field" placeholder="Teacher to Remove" />
+        </div>
+        <div>
+            <input type="button" value="Delete" id="deleteButton" style="@Model.deleteButton" />
+            <div style="color: red; font-size: 1.0em; position: absolute">
+                @Model.deleteMSG
+            </div>
+        </div>
+    </form>
+</div>
+

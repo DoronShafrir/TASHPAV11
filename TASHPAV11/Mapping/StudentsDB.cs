@@ -1,20 +1,24 @@
-﻿using System.Data;
-using System.Data.OleDb;
-using System.Data.SqlClient;
+﻿using System.Data.OleDb;
 using TASHPAV11.App_Code;
 using TASHPAV11.Model;
 
 namespace TASHPAV11.Mapping
 {
-    public class CoursesDB
+    public class StudentsDB
     {
         private readonly string connectionString = Imp_Data.ConString;
+
+
 
         public Coursess SelectAll()
         {
             Coursess courses = new Coursess();
-            const string sql = "SELECT Courses.CId, Courses.CourseName, Courses.CourseNumber, Person.Name " +
-                "FROM Courses INNER JOIN Person ON Courses.ResponsibleTeacher=Person.Id;";
+            const string sql = "SELECT student_person.Name AS StudentName, Courses.CourseName, " +
+    "teacher_person.Name AS TeacherName " +
+    "FROM Student " +
+    "JOIN Person AS student_person ON Student.SId = student_person.Id " +
+    "JOIN Courses ON Student.CourseId = Courses.CId " +
+    "JOIN Person AS teacher_person ON Courses.ResponsibleTeacher = teacher_person.Id;";
             using var connection = new OleDbConnection(connectionString);
             using var command = new OleDbCommand(sql, connection);
 
@@ -27,8 +31,8 @@ namespace TASHPAV11.Mapping
                 Course course = new Course();
                 course = new Course
                 {
-                    CId = int.Parse(reader["CId"].ToString()),
-                    CourseName = reader["CourseName"].ToString(),
+                    student.Name = reader["StudentName"].ToString()),
+                    CourseName = reader["StudentName"].ToString(),
                     CourseNumber = reader["CourseNumber"].ToString(),
                     Name = reader["Name"].ToString()
                 };
@@ -45,8 +49,8 @@ namespace TASHPAV11.Mapping
             string arg2 = course.CourseNumber;
             int arg3 = CheckName(course.Name);
             if (!(arg3 > 0)) return 0;
-            
-            string sql = $"INSERT INTO Courses (CourseName, CourseNumber, ResponsibleTeacher) " + 
+
+            string sql = $"INSERT INTO Courses (CourseName, CourseNumber, ResponsibleTeacher) " +
                 $"VALUES('{arg1}','{arg2}', {arg3}) ";
             using var connection = new OleDbConnection(connectionString);
             using var command = new OleDbCommand(sql, connection);
@@ -74,8 +78,8 @@ namespace TASHPAV11.Mapping
             connection.Open();
 
             records = command.ExecuteNonQuery();
-            
-            
+
+
             return records;
         }
 
@@ -86,9 +90,10 @@ namespace TASHPAV11.Mapping
             using var connection = new OleDbConnection(connectionString);
             using var command = new OleDbCommand(sql, connection);
             connection.Open();
-                recordId = (int)command.ExecuteScalar();
-           
+            recordId = (int)command.ExecuteScalar();
+
             return recordId;
         }
     }
+}
 }
