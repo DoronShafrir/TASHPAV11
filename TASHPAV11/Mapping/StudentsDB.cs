@@ -1,4 +1,6 @@
 ﻿using System.Data.OleDb;
+using System.Security.Cryptography;
+using System.Xml.Linq;
 using TASHPAV11.App_Code;
 using TASHPAV11.Model;
 
@@ -8,17 +10,16 @@ namespace TASHPAV11.Mapping
     {
         private readonly string connectionString = Imp_Data.ConString;
 
-
-
-        public Coursess SelectAll()
+        public Studentss SelectAll()
         {
-            Coursess courses = new Coursess();
-            const string sql = "SELECT student_person.Name AS StudentName, Courses.CourseName, " +
-    "teacher_person.Name AS TeacherName " +
-    "FROM Student " +
-    "JOIN Person AS student_person ON Student.SId = student_person.Id " +
-    "JOIN Courses ON Student.CourseId = Courses.CId " +
-    "JOIN Person AS teacher_person ON Courses.ResponsibleTeacher = teacher_person.Id;";
+            Studentss students = new Studentss();
+            const string sql = "SELECT student_person.[Name] AS StudentName, " +
+               "c.[CourseName], teacher_person.Name AS TeacherName " +
+               "FROM (([Student] " +
+               "INNER JOIN [Person] AS student_person ON [Student].[SId ] = student_person.[Id]) " +
+               "INNER JOIN [Courses] AS c ON [Student].[CourseId] = c.[CId]) " +
+                " INNER JOIN [Person] AS teacher_person ON c.[ResponsibleTeacher] = teacher_person.[Id];";
+
             using var connection = new OleDbConnection(connectionString);
             using var command = new OleDbCommand(sql, connection);
 
@@ -28,17 +29,17 @@ namespace TASHPAV11.Mapping
 
             while (reader!.Read())
             {
-                Course course = new Course();
-                course = new Course
+                Student student = new Student();
+                student = new Student
                 {
-                    student.Name = reader["StudentName"].ToString()),
+                    Name = reader["StudentName"].ToString(),
                     CourseName = reader["StudentName"].ToString(),
                     CourseNumber = reader["CourseNumber"].ToString(),
-                    Name = reader["Name"].ToString()
+
                 };
-                courses.Add(course);
+                students.Add(student);
             }
-            return courses;
+            return students;
         }
 
 
@@ -96,4 +97,4 @@ namespace TASHPAV11.Mapping
         }
     }
 }
-}
+
