@@ -1,10 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Data.OleDb;
-using TASHPAV11.Model;
 using System;
 using System.Data;
+using System.Data.OleDb;
+using System.Security.Cryptography;
 using TASHPAV11.App_Code;
+using TASHPAV11.Model;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 //using System.Data.SqlClient;
 //using Tashpa11.Model;
 
@@ -21,6 +23,7 @@ namespace TASHPAV11.Pages.Login
         {
 
             string connectionString = Imp_Data.ConString;
+            //string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\Users\\USER\\OneDrive\\DSH\\Doron\\sources\\repos\\TASHPAV11\\TASHPAV11\\App_Data\\LoginDB.accdb;Persist Security Info=True";
             OleDbConnection con = new(connectionString);
             
             // בניית פקודת SQL
@@ -61,17 +64,10 @@ namespace TASHPAV11.Pages.Login
                 msg = "Wrong username or password";
                 return Page();
             }
-
-            //this.UserName = HttpContext.Session.GetString("FirstName").ToString();
-            //this.Password = HttpContext.Session.GetString("LastName").ToString();
-            //bool b = HttpContext.Session.GetString("FirstName").ToString().IsNullOrEmpty();
-
+                        
 
         }
-        //        catch
-        //        {
-        //            return RedirectToPage("/Index");
-        //}
+        
 
 
     }

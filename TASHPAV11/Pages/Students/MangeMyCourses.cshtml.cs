@@ -20,6 +20,8 @@ namespace TASHPAV11.Pages.Students
         public string deleteMSG { get; set; }
         public Studentss List { get; set; } = new Studentss();
         public Student Student { get; set; } = new Student();
+        [BindProperty]
+        public Coursess courseList { get; set; } = new Coursess();
 
 
         public void OnGet()
@@ -31,6 +33,8 @@ namespace TASHPAV11.Pages.Students
             deleteButton = "display:none";
             StudentsDB db = new StudentsDB();
             List = db.SelectAll();
+            
+
         }
         public void OnPostRenderCourses()
         {
@@ -50,6 +54,8 @@ namespace TASHPAV11.Pages.Students
             insert_button = "display:block";
             delete_input = "display:none";
             deleteButton = "display:none";
+            CoursesDB courseList = new CoursesDB();
+            this.courseList = courseList.SelectAll();
         }
         public void OnPostShowDeleteCourse()
         {

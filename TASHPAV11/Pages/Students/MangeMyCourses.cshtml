@@ -52,10 +52,20 @@
         @* Add Insert part *@
         <form method="post" asp-page-handler="InsertCourse">
             <div id="active_input" style="@Model.active_input">
-                <input type="text" id="newCourseName" name="newCourseName" class="input_field" placeholder="Course Name" />
-                <input type="text" id="newCourseNumber" name="newCourseNumber" class="input_field" placeholder="Course Number" />
-                <input type="text" id="newCourseTeacher" name="newCourseTeacher" class="input_field" placeholder="Teacher" />
-
+                @if (Model.courseList != null && Model.courseList.Count > 0)
+                {
+                    <select id="courseSelect" name="courseSelect" class="input_field">
+                        <option value="">Select a Course</option>
+                        @foreach (var course in Model.courseList)
+                        {
+                            <option value="@course.CId">
+                                @course.CourseName  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+                                Course Number: @course.CourseNumber   &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Teacher: @course.ResponsibleTeacher
+                            </option>
+                         }
+                         </select>
+                    
+                }
                 <button type="submit" value="Insert" id="submitNewButton" style="@Model.insert_button">
                     Insert
                 </button>
