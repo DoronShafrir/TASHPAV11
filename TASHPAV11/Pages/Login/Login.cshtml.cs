@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.OleDb;
 using System.Security.Cryptography;
 using TASHPAV11.App_Code;
+using TASHPAV11.H_Model;
 using TASHPAV11.Model;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 //using System.Data.SqlClient;
@@ -27,7 +28,7 @@ namespace TASHPAV11.Pages.Login
             OleDbConnection con = new(connectionString);
             
             // בניית פקודת SQL
-            string SQLStr = $"SELECT * FROM Person WHERE UserName = '{userName}' AND Password = '{password}';";
+            string SQLStr = $"SELECT * FROM [Person] WHERE [UserName] = '{userName}' AND [Password] = '{password}';";
             OleDbCommand cmd = new(SQLStr, con);
 
             // בניית DataSet
@@ -44,11 +45,15 @@ namespace TASHPAV11.Pages.Login
             {
 
                 Person person = new Person();
+                person.PId = int.Parse(ds.Tables[0].Rows[0]["Id"].ToString());
                 person.Name = ds.Tables[0].Rows[0]["Name"].ToString();
                 person.FName = ds.Tables[0].Rows[0]["FName"].ToString();
                 person.UserName = ds.Tables[0].Rows[0]["UserName"].ToString();
                 person.Admin = bool.Parse(ds.Tables[0].Rows[0]["Admin"].ToString());
                 string IsAdmin = person.Admin == true ? "Admin" : "NotAdmin";
+                int SId = person.Teacher == true ? 0 : person.PId;
+               
+                SIdP.StudentId = SId;
 
                 HttpContext.Session.SetString("Admin", IsAdmin);
 
@@ -56,7 +61,7 @@ namespace TASHPAV11.Pages.Login
                 HttpContext.Session.SetString("Username", person.UserName);
                 HttpContext.Session.SetString("FirstName", person.Name);
                 HttpContext.Session.SetString("LastName", person.FName);
-
+                HttpContext.Session.SetString("SId", SId.ToString());
                 return RedirectToPage("/Index");
             }
             else

@@ -22,8 +22,8 @@ namespace TASHPAV11.Pages.Students
         public Student Student { get; set; } = new Student();
         [BindProperty]
         public Coursess courseList { get; set; } = new Coursess();
-
-
+         
+        
         public void OnGet()
         {
             active_input = "display:none";
@@ -65,15 +65,17 @@ namespace TASHPAV11.Pages.Students
             delete_input = "display:block";
             deleteButton = "display:block";
         }
-        public void OnPostInsertCourse(string newCourseName, string newCourseNumber, string newCourseTeacher)
+        public void Insert(int Insert, int courseID)
         {
-            Course newCourse = new Course();
-            CoursesDB db = new CoursesDB();
-            newCourse.CourseName = newCourseName;
-            newCourse.CourseNumber = newCourseNumber;
-            newCourse.Name = newCourseTeacher;
+            
+            //Course newCourse = new Course();
+            //CoursesDB db = new CoursesDB();
+            //newCourse.CourseName = newCourseName;
+            //newCourse.CourseNumber = newCourseNumber;
+            //newCourse.Name = newCourseTeacher;
 
-            int records = db.Insert(newCourse);
+            StudentsDB db = new StudentsDB();
+            int records = db.Insert(Insert, courseID);
             delete_input = "display:none";
             deleteButton = "display:none";
             if (records == 1)
