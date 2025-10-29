@@ -2,3 +2,87 @@
 @model TASHPAV11.Pages.Login.LogUpModel
 @{
 }
+<script src="~/js/LogUp.js"></script>
+<div>
+    <h1 style="margin-left:40%;">LogUp Form</h1>
+</div>
+<div class="row justify-content-center align-itms-center">
+    <div class="col-sm-11 col-md-9 col-lg-7 col-xl-5">
+        <div class="card h-100">
+            <div class="card-header">
+                <div class="card-body">
+                    <form method="post">
+
+                        <table id="names">
+                            <tr>
+                                <td>User First Name</td>
+                                <td id="fName">
+                                    <input type="text" asp-for="person.Name" onkeyup="checkName(this, 'fmsg')" />
+                                </td>
+                                <td id="fmsg" class="messages" runat="server"></td>
+                            </tr>
+                            <tr>
+                                <td>Last Name</td>
+                                <td id="lName">
+                                    <input type="text" asp-for="person.FName" onkeyup="checkName(this, 'lmsg')" />
+                                </td>
+                                <td id="lmsg" class="messages"></td>
+                            </tr>
+                            <tr>
+                                <td>User Name</td>
+                                <td id="uName">
+                                    <input type="text" asp-for="person.UserName" onkeyup="checkName(this, 'umsg')" />
+                                </td>
+                                <td id="umsg" class="messages" runat="server" style="color: red"></td>
+                            </tr>
+                            <tr>
+                                <td>Password</td>
+                                <td id="pName">
+                                    <input type="password" asp-for="person.Password" onkeyup="checkPass(this)" />
+                                </td>
+                                <td id="pmsg" class="messages"></td>
+                            </tr>
+                            <tr>
+                                <td>Teacher</td>
+                                <td id="teacher">
+                                    <input type="radio" asp-for="TeacherYN" value="True">
+                                    <label> Teacher</label><br>
+                                    <input type="radio" asp-for="TeacherYN" value="False">
+                                    <label>Student</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Admin</td>
+                                <td id="admin">
+                                    <input type="radio" asp-for="AdminYN" value="True">
+                                    <label>Admin</label><br>
+                                    <input type="radio" asp-for="AdminYN" value="False">
+                                    <label>Regular</label>
+                                </td>
+                                <td id="gmsg" class="messages"></td>
+                            </tr>
+
+                            <tr>
+                                <td>Confirmation</td>
+                                <td>
+                                    <label for="cName">please confirm that all above is correct</label>
+                                    <input id="cName" type="checkbox" name="confirmation" onclick="clearConfirm()" />
+                                </td>
+                                <td id="cmsg" class="messages"></td>
+
+                            </tr>
+                        </table>
+
+                        <input type="submit" name="submit" class="login" value="LogUp" onclick="return login1()" />
+                        <input type="reset" class="reset" value="RESET" onclick="reset2('login-msg','password-msg')" />
+
+                        <div class="mb-3 form-text text-danger " id="msgBox">
+                            @Model.msg
+                        </div>
+
+
+                    </form>
+                    <div>
+                    </div>
+                </div>
+            </div>
