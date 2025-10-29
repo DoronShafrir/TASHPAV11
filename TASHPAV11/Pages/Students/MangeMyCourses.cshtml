@@ -19,7 +19,7 @@
         <div id="List" style="@Model.DisplayList">@Html.Raw(@Model.List)</div>
     </form> *@
 </div>
-@* Add Insert part *@
+@* Show table of course to the specific Stdent *@
 <div id="CourseTable" style="@Model.DisplayList">
 
 
@@ -54,11 +54,11 @@
             <div id="active_input" style="@Model.active_input">
                 @if (Model.courseList != null && Model.courseList.Count > 0)
                 {
-                    <select id="courseSelect" name="courseSelect" class="input_field">
-                        <option value="">Select a Course</option>
+                    <select id="CourseToAdd" name="CourseToAdd" class="input_field">
+                      
                         @foreach (var course in Model.courseList)
                         {
-                            <option value="@course.CId">
+                            <option value="@course.CourseNumber">
                                 @course.CourseName  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
                                 Course Number: @course.CourseNumber   &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Teacher: @course.ResponsibleTeacher
                             </option>
@@ -66,7 +66,7 @@
                          </select>
                     
                 }
-                <button type="submit" value="Insert" id="submitNewButton" style="@Model.insert_button">
+                <button type="submit" value="Submit" id="submitNewButton" style="@Model.insert_button">
                     Insert
                 </button>
                 <div style="color: red; font-size: 1.0em; position: absolute">
