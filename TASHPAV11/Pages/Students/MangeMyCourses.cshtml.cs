@@ -22,10 +22,9 @@ namespace TASHPAV11.Pages.Students
         public Student Student { get; set; } = new Student();
         [BindProperty]
         public Coursess courseList { get; set; } = new Coursess();
+
         [BindProperty]
         public int CourseToAdd { get; set; }
-
-
 
         public void OnGet()
         {
@@ -36,7 +35,7 @@ namespace TASHPAV11.Pages.Students
             deleteButton = "display:none";
             StudentsDB db = new StudentsDB();
             List = db.SelectAll();
-            
+
 
         }
         public void OnPostRenderCourses()
@@ -68,22 +67,30 @@ namespace TASHPAV11.Pages.Students
             delete_input = "display:block";
             deleteButton = "display:block";
         }
+
         public void OnPostInsertCourse(int CourseToAdd)
         {
-            
-            
+
 
             StudentsDB db = new StudentsDB();
             int records = db.Insert(CourseToAdd);
-            delete_input = "display:none";
-            deleteButton = "display:none";
-            if (records == 1)
-            {
-                insert_button = "disply:none";
-                insertMSG = "Course Added Successfuly";
-            }
-            else { insertMSG = "Could Not Add Course !!!"; }
-            ;
+
+            //public void Insert(int Insert, int courseID)
+            //{
+
+
+            //    StudentsDB db = new StudentsDB();
+            //    int records = db.Insert(Insert, courseID);
+            //    delete_input = "display:none";
+            //    deleteButton = "display:none";
+            //    if (records == 1)
+            //    {
+            //        insert_button = "disply:none";
+            //        insertMSG = "Course Added Successfuly";
+            //    }
+            //    else { insertMSG = "Could Not Add Course !!!"; }
+            //    ;
+            //}
         }
     }
 }

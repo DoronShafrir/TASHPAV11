@@ -30,6 +30,11 @@ namespace TASHPAV11.Pages.Login
             // בניית פקודת SQL
             string SQLStr = $"SELECT * FROM [Person] WHERE [UserName] = '{userName}' AND [Password] = '{password}';";
             OleDbCommand cmd = new(SQLStr, con);
+            //If you want to make it safly against SQL Injection, use parameters like this: so make [USERNAME]=?
+            //cmd.Parameters.Add("?", OleDbType.VarWChar, 255).Value = UserName?.Trim();
+
+            //// בניית DataSet וטעינה
+            //using var adapter = new OleDbDataAdapter(cmd);
 
             // בניית DataSet
             DataSet ds = new DataSet();

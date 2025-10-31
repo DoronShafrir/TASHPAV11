@@ -22,20 +22,18 @@ namespace TASHPAV11.Pages.Login
         }
         public IActionResult OnPost(string Name, string FName, string UserName, string Password)
         {
-
-
             // בדיקה אם קיים שם משתמש
             string connectionString = Imp_Data.ConString;
             OleDbConnection con = new(connectionString);
             // בניית פקודת SQL
-            string SQLStr = $"SELECT * FROM Person WHERE UserName = '{UserName}'";
+            string SQLStr = $"SELECT * FROM [Person] WHERE [UserName] = '{UserName}'";
             OleDbCommand cmd = new(SQLStr, con);
 
             // בניית DataSet
             DataSet ds = new DataSet();
 
             // טעינת הנתונים
-            OleDbCommand adapter = new(cmd);
+            OleDbDataAdapter adapter = new(cmd);
             adapter.Fill(ds, "names");
 
             int count = ds.Tables[0].Rows.Count;
@@ -53,21 +51,26 @@ namespace TASHPAV11.Pages.Login
 
                 try
                 {
-
+                   
                     dr["Name"] = person.Name;
                     dr["FName"] = person.FName;
                     dr["UserName"] = person.UserName;
                     dr["Password"] = person.Password;
-                    dr["Admin"] = bool.Parse(AdminYN.ToString());
-                    dr["Teacher"] = bool.Parse(TeacherYN.ToString());
+                    //dr["Admin"] = bool.Parse('0');
+                    //dr["Teacher"] = bool.Parse('0');
                     //dr["Admin"] = 0;
+                    //dr["Teacher"] = 0;
                     ds.Tables["names"].Rows.Add(dr);
 
 
-                    // עדכון הדאטה סט בבסיס הנתונים
-                    SqlCommandBuilder builder = new SqlCommandBuilder(adapter);
+                    //// עדכון הדאטה סט בבסיס הנתונים
+                    OleDbCommandBuilder builder = new OleDbCommandBuilder(adapter);
+                    builder.QuotePrefix = "[";
+                    builder.QuoteSuffix = "]";
                     adapter.UpdateCommand = builder.GetInsertCommand();
-                    adapter.Update(ds, "names");
+                    
+                    // Push changes to the database
+                    adapter.Update(ds, "names");         // InsertCommand will be used for Added rows
 
                     return RedirectToPage("/Index");
                 }

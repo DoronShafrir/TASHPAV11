@@ -12,7 +12,6 @@
             <div class="card-header">
                 <div class="card-body">
                     <form method="post">
-
                         <table id="names">
                             <tr>
                                 <td>User First Name</td>
@@ -73,16 +72,19 @@
                             </tr>
                         </table>
 
-                        <input type="submit" name="submit" class="login" value="LogUp" onclick="return login1()" />
+                        <input type="submit" name="submit" class="login" value="LogUp"  />
+                        @* <input type="submit" name="submit" class="login" value="LogUp" onclick="return login1()" /> *@
                         <input type="reset" class="reset" value="RESET" onclick="reset2('login-msg','password-msg')" />
-
-                        <div class="mb-3 form-text text-danger " id="msgBox">
-                            @Model.msg
-                        </div>
 
 
                     </form>
-                    <div>
+
+                    <div class="mb-3 form-text text-danger " id="msgBox">
+                        @Model.msg
                     </div>
                 </div>
+                
             </div>
+        </div>
+    </div>
+</div> 
