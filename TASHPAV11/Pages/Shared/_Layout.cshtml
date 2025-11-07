@@ -3,7 +3,8 @@
     var sessionValue = Context.Session.GetString("Username");
     var sessionAdmin = Context.Session.GetString("Admin");
     var sessionFirst = Context.Session.GetString("Admin");
-
+    var FirstName = Context.Session.GetString("FirstName");
+    
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +18,10 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div>
+            <h2 style="color:red">@FirstName</h2>
+        </div>
+        <  <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-page="/Index">TASHPAV11</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"

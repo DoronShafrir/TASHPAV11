@@ -26,7 +26,7 @@ namespace TASHPAV11.Pages.Login
             string connectionString = Imp_Data.ConString;
             OleDbConnection con = new(connectionString);
             // בניית פקודת SQL
-            string SQLStr = $"SELECT * FROM [Person] WHERE [UserName] = '{UserName}'";
+            string SQLStr = $"SELECT * FROM [Person] WHERE [UserName] = '{person.UserName}'";
             OleDbCommand cmd = new(SQLStr, con);
 
             // בניית DataSet

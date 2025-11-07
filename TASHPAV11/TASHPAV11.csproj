@@ -13,7 +13,6 @@
 
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="NewFolder\" />
   </ItemGroup>
 
 </Project>

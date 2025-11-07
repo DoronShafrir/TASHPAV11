@@ -134,6 +134,3 @@ function reset1() {
     });
 }
 
-//function register1() {
-//    alert("I am crazy");
-//}

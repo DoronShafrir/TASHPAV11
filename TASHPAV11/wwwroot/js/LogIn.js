@@ -1,5 +1,5 @@
 ﻿function checkLogInValidity(e, msgBox) {
-    const reg = /^[a-zA-Z0-9]+$/
+    const reg = /^[a-zA-Z0-9#]+$/
     const msgName = document.getElementById(msgBox)
 
     if (!e.value.match(reg)) {
@@ -21,7 +21,10 @@ function login1(e) {
     let result = true;
     let messages = document.querySelectorAll(".messages");
     messages.forEach((message) => {
-        if (message.innerHTML != "ALL GOOD") { result = false }
+        if (message.innerHTML != "ALL GOOD") {
+            result = false;
+            alert("input fields do not match requirements");
+        }
     });
     return result;
 

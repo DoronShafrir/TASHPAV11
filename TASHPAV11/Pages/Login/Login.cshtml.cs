@@ -24,17 +24,13 @@ namespace TASHPAV11.Pages.Login
         {
 
             string connectionString = Imp_Data.ConString;
-            //string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\Users\\USER\\OneDrive\\DSH\\Doron\\sources\\repos\\TASHPAV11\\TASHPAV11\\App_Data\\LoginDB.accdb;Persist Security Info=True";
+            
             OleDbConnection con = new(connectionString);
             
             // בניית פקודת SQL
             string SQLStr = $"SELECT * FROM [Person] WHERE [UserName] = '{userName}' AND [Password] = '{password}';";
             OleDbCommand cmd = new(SQLStr, con);
-            //If you want to make it safly against SQL Injection, use parameters like this: so make [USERNAME]=?
-            //cmd.Parameters.Add("?", OleDbType.VarWChar, 255).Value = UserName?.Trim();
-
-            //// בניית DataSet וטעינה
-            //using var adapter = new OleDbDataAdapter(cmd);
+           
 
             // בניית DataSet
             DataSet ds = new DataSet();

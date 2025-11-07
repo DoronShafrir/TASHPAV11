@@ -30,7 +30,8 @@
                             <tr>
                                 <td>User Name</td>
                                 <td id="uName">
-                                    <input type="text" asp-for="person.UserName" onkeyup="checkName(this, 'umsg')" />
+                                    <input type="text" asp-for="person.UserName" onkeyup="checkName(this, 'umsg')" /> 
+                                    @* <input type="text" name="UserName" onkeyup="checkName(this, 'umsg')" /> *@
                                 </td>
                                 <td id="umsg" class="messages" runat="server" style="color: red"></td>
                             </tr>
