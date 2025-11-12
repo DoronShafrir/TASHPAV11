@@ -5,7 +5,7 @@
         public int Id { get; set; }
         public int SId { get; set; }
         public int CourseId { get; set; }
-        public string TeacherName { get; set; }
+        
     }
 
     public class Studentss : List<Student>

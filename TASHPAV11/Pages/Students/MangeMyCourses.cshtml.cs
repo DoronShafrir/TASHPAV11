@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using TASHPAV11.H_Model;
 using TASHPAV11.Mapping;
 using TASHPAV11.Model;
 
@@ -18,8 +19,8 @@ namespace TASHPAV11.Pages.Students
         public string insertMSG { get; set; }
         public string insert_button { get; set; }
         public string deleteMSG { get; set; }
-        public Studentss List { get; set; } = new Studentss();
-        public Student Student { get; set; } = new Student();
+        public Studentss_Select List { get; set; } = new Studentss_Select();
+        public Student_Select Student { get; set; } = new Student_Select();
         [BindProperty]
         public Coursess courseList { get; set; } = new Coursess();
 

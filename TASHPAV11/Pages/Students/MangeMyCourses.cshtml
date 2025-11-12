@@ -1,4 +1,5 @@
 ﻿@page
+@using TASHPAV11.H_Model
 @model TASHPAV11.Pages.Students.MangeMyCoursesModel
 @{
 }
@@ -34,13 +35,13 @@
 
             </tr>
 
-            @foreach (Model.Student student in Model.List)
+            @foreach (Student_Select student in Model.List)
             {
                 <tr>
                     <td>@student.Id</td>
                     <td>@student.Name</td>
                     <td>@student.CourseName</td>
-                    <td>@student.ResponsibleTeacher</td>
+                    <td>@student.TeacherName</td>
                 </tr>
             }
 
@@ -55,6 +56,7 @@
                 @if (Model.courseList != null && Model.courseList.Count > 0)
                 {
                     <select id="CourseToAdd" name="CourseToAdd" class="input_field">
+                        <option value="" disabled selected>Choose between the options</option>
                       
                         @foreach (var course in Model.courseList)
                         {

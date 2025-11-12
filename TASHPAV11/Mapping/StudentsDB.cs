@@ -12,14 +12,14 @@ namespace TASHPAV11.Mapping
         private readonly string connectionString = Imp_Data.ConString;
        
          
-        public Studentss SelectAll()
+        public Studentss_Select SelectAll()
         {
             int SId = SIdP.StudentId;
-            Studentss students = new Studentss();
-            Student student = new Student();
+            Studentss_Select students = new Studentss_Select();
+            Student_Select student = new Student_Select();
             int count = 0;
             string sql1 = $"SELECT student_person.[Id] AS StudentId, student_person.[Name] AS StudentName, " +
-               "c.[CourseName], teacher_person.Id AS TeacherId " +
+               "c.[CourseName], teacher_person.[Name] AS TeacherName " +
                "FROM (([Student] " +
                "INNER JOIN [Person] AS student_person ON [Student].[SId] = student_person.[Id]) " +
                "INNER JOIN [Courses] AS c ON [Student].[CourseId] = c.[CId]) " +
@@ -36,15 +36,15 @@ namespace TASHPAV11.Mapping
             while (reader.Read())
             {
                 count++;
-               student = new Student()
+               student = new Student_Select()
                 {
                     Id = (int)reader["StudentId"],
                     Name = reader["StudentName"].ToString(),
                     CourseName = reader["CourseName"].ToString(),
-                    ResponsibleTeacher = (int)reader["TeacherId"]
+                   TeacherName = reader["TeacherName"].ToString()
 
-                };
-                students.Add(student);
+               };
+             students.Add(student);
             }
             return students;
         }
