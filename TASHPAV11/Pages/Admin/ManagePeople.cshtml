@@ -1,0 +1,59 @@
+﻿@page
+@model TASHPAV11.Pages.Admin.ManagePeopeleModel
+@{
+}
+<div class="container my-5">
+    <div class="d-flex justify-content-between gap-3">
+        <form method="get" asp-page-handler="RenderPeople">
+            <button type="submit" value="Show All People" class="btn btn-primary">Show All People</button>
+        </form>
+        <form method="post" asp-page-handler="ShowAddPeople">
+            <button type="submit" value="Add Person" class="btn btn-primary">Show Students Only</button>
+        </form>
+        <form method="post" asp-page-handler="ShowDeletePeople">
+            <button type="submit" value="Delete Person" class="btn btn-primary">Show Teachers Only</button>
+        </form>
+    </div>
+@* <div id="CourseTable" style="@Model.DisplayList"> *@
+
+
+@if (Model.List != null && Model.List.Count > 0)
+{
+        <table class='table table-bordered table-striped'>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Family Name</th>
+                <th>User Name </th>
+                <th>Password </th>
+                <th>Admin/ Regular </th>
+                <th>Teacher/ Student </th>
+
+            </tr>
+
+            @foreach (Model.Person person in Model.List)
+            {
+                <tr>
+                    <td>@person.Id</td>
+                    <td>@person.Name</td>
+                    <td>@person.FName</td>
+                    <td>@person.UserName</td>
+                    <td>@person.Password</td>
+                    <td>@person.Admin</td>
+                    <td>
+                        <div class="d-flex justify-content-center gap-2">
+
+                            <form method="post" asp-page-handler="ToggleTeacherStudent" style="display:inline;">
+                                <input type="hidden" name="TeacherToToggle" value="@person.Id" />
+                                <button type="submit" class="btn btn-light btn-sm"
+                                        onclick="return confirm('Are you sure you want to change');">
+                                    @person.Teacher
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            }
+
+        </table>
+}

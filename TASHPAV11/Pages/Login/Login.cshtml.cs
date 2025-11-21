@@ -46,13 +46,13 @@ namespace TASHPAV11.Pages.Login
             {
 
                 Person person = new Person();
-                person.PId = int.Parse(ds.Tables[0].Rows[0]["Id"].ToString());
+                person.Id = int.Parse(ds.Tables[0].Rows[0]["Id"].ToString());
                 person.Name = ds.Tables[0].Rows[0]["Name"].ToString();
                 person.FName = ds.Tables[0].Rows[0]["FName"].ToString();
                 person.UserName = ds.Tables[0].Rows[0]["UserName"].ToString();
                 person.Admin = bool.Parse(ds.Tables[0].Rows[0]["Admin"].ToString());
                 string IsAdmin = person.Admin == true ? "Admin" : "NotAdmin";
-                int SId = person.Teacher == true ? 0 : person.PId;
+                int SId = person.Teacher == true ? 0 : person.Id;
                
                 SIdP.StudentId = SId;
 
