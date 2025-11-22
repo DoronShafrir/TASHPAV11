@@ -22,5 +22,11 @@ namespace TASHPAV11.Pages.Admin
             dB.ToggleTeacherStudent(TeacherToToggle);
             List = dB.SelectAllPeople();   
         }
+        public void OnPostToggleAdministratorRegular(int AdministratorToToggle)
+        {
+            AdminDB dB = new AdminDB();
+            dB.ToggleAdministratorRegular(AdministratorToToggle);
+            List = dB.SelectAllPeople();
+        }
     }
 }

@@ -1,25 +1,29 @@
 ﻿@page
 @model TASHPAV11.Pages.Admin.ManagePeopeleModel
+<script src="~/js/AdminJS.js"></script>
 @{
 }
+< script src = "c:\users\user\onedrive\dsh\doron\sources\repos\tashpav11\tashpav11\wwwroot\js\adminjs.js" ></ script >
 <div class="container my-5">
     <div class="d-flex justify-content-between gap-3">
         <form method="get" asp-page-handler="RenderPeople">
             <button type="submit" value="Show All People" class="btn btn-primary">Show All People</button>
         </form>
-        <form method="post" asp-page-handler="ShowAddPeople">
-            <button type="submit" value="Add Person" class="btn btn-primary">Show Students Only</button>
-        </form>
-        <form method="post" asp-page-handler="ShowDeletePeople">
-            <button type="submit" value="Delete Person" class="btn btn-primary">Show Teachers Only</button>
-        </form>
+       
+        <div>
+            <input type="text" id="myInput" placeholder="Search...">
+            <button id="btnSearch" class="btn btn-primary">Search</button>
+        </div>
+        <div>
+            <button id="TeachersOnly" class="btn btn-primary" onmouseup="TeachersOnly()">Show Teachers Only</button>
+        </div>
     </div>
-@* <div id="CourseTable" style="@Model.DisplayList"> *@
+    <div><br /><br /><br /></div>
 
 
 @if (Model.List != null && Model.List.Count > 0)
 {
-        <table class='table table-bordered table-striped'>
+        <table id="AllPeopleTable" class='table table-bordered table-striped'>
             <tr>
                 <th>ID</th>
                 <th>Name</th>
@@ -39,7 +43,18 @@
                     <td>@person.FName</td>
                     <td>@person.UserName</td>
                     <td>@person.Password</td>
-                    <td>@person.Admin</td>
+                    <td>
+                        <div class="d-flex justify-content-center gap-2">
+
+                            <form method="post" asp-page-handler="ToggleAdministratorRegular" style="display:inline;">
+                                <input type="hidden" name="AdministratorToToggle" value="@person.Id" />
+                                <button type="submit" class="btn btn-light btn-sm"
+                                        onclick="return confirm('Are you sure you want to change');">
+                                    @person.Admin
+                                </button>
+                            </form>
+                        </div>
+                    </td>
                     <td>
                         <div class="d-flex justify-content-center gap-2">
 
@@ -54,6 +69,26 @@
                     </td>
                 </tr>
             }
-
         </table>
+        <script>
+            //filter out all rows out of criteria
+            document.getElementById("btnSearch").addEventListener("click", function () {
+                let filter = document.getElementById("myInput").value.toLowerCase();
+                let rows = document.querySelectorAll("#AllPeopleTable tr");
+
+                rows.forEach(row => {
+                    // skip header
+                    if (row.querySelector("th")) return;
+                    let text = row.innerText.toLowerCase();
+            @* let cell = row.querySelector("td:nth-child(2)"); // Family Name column
+            if (!cell) return; // skip header
+            let text = cell.innerText.toLowerCase(); *@
+
+
+                    row.style.display = text.includes(filter) ? "" : "none";
+                });
+            });
+
+                          
+        </script>
 }

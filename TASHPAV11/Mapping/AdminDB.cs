@@ -58,5 +58,26 @@ namespace TASHPAV11.Mapping
             return done;
 
         }
+        public int ToggleAdministratorRegular(int AdminToToggle)
+        {
+            int done = 0;
+
+            const string sql = "UPDATE Person SET [Admin] = NOT [Admin] WHERE Id = ?;";
+            using var connection = new OleDbConnection(connectionString);
+            using var command = new OleDbCommand(sql, connection);
+            using (OleDbCommand cmd = new OleDbCommand(sql, connection))
+            {
+                // ORDER MATTERS in OleDb (positional parameters)
+                cmd.Parameters.AddWithValue("?", AdminToToggle.ToString());
+
+                connection.Open();
+                done = cmd.ExecuteNonQuery();
+            }
+
+            return done;
+
+        }
+        
+
     }
 }
