@@ -1,8 +1,16 @@
-﻿@page
+﻿
+@page
 @model TASHPAV11.Pages.Admin.ManagePeopeleModel
 <script src="~/js/AdminJS.js"></script>
 @{
 }
+
+ @{
+ var sessionAdmin = HttpContext.Session.GetString("Admin");
+ if(sessionAdmin != "Admin")
+ {
+     Response.Redirect("/Index");
+}}
 < script src = "c:\users\user\onedrive\dsh\doron\sources\repos\tashpav11\tashpav11\wwwroot\js\adminjs.js" ></ script >
 <div class="container my-5">
     <div class="d-flex justify-content-between gap-3">
