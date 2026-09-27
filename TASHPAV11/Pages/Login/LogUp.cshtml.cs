@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Data;
@@ -17,6 +18,8 @@ namespace TASHPAV11.Pages.Login
         [BindProperty]
         public Person person { get; set; }
         public string msg { get; set; }
+        [BindProperty]
+        public bool confirmation { get; set; }
         public void OnGet()
         {
         }
@@ -56,6 +59,7 @@ namespace TASHPAV11.Pages.Login
                     dr["FName"] = person.FName;
                     dr["UserName"] = person.UserName;
                     dr["Password"] = person.Password;
+                    bool aaa = confirmation;
                     //dr["Admin"] = bool.Parse('0');
                     //dr["Teacher"] = bool.Parse('0');
                     //dr["Admin"] = 0;
